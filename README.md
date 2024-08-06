@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Document Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a Document Management Application built using React.js with hooks. The application loads a set of document metadata from a static JSON file and displays them as draggable and reorderable cards. Users can click on a card to view its associated image in an overlay. The application also saves the document order to local storage and syncs it with a mock server using the Mock Service Worker (MSW).
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Display documents as draggable cards.
+- Reorder cards using drag and drop.
+- View document images in an overlay.
+- Save document order to local storage.
+- Sync data with a mock server every 5 seconds if changes are made.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js and npm installed on your local machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
+    ```cmd
+    git clone https://github.com/your-username/document-management-app.git
+    cd document-management-app
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+    ```cmd
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Running the Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Start the mock server and the React application:
+    ```cmd
+    npm start
+    ```
 
-### `npm run eject`
+2. Open your browser and navigate to `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The application will display a set of document cards.
+- Drag and drop the cards to reorder them.
+- Click on a card to view the associated image in an overlay.
+- The application automatically saves the document order to local storage and syncs with the mock server every 5 seconds if changes are made.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Thought Process
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Initial Setup
 
-## Learn More
+The project began with creating the basic structure of a React application using `create-react-app`. The initial focus was on loading and displaying the document data from a static JSON file. React hooks were used to manage the state of the documents and the selected image for the overlay.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Drag and Drop Functionality
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To implement the drag and drop functionality, I integrated the `react-dnd` library. This required setting up `DndProvider` in the main `App` component and creating a `Card` component that could be dragged and dropped. Each card's position is managed in the state to allow reordering.
 
-### Code Splitting
+### Image Overlay
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The image overlay feature was implemented using a simple state toggle. When a card is clicked, the associated image is displayed in an overlay, and pressing the ESC key or clicking outside the image closes the overlay.
 
-### Analyzing the Bundle Size
+### Mock Server with MSW
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+For the mock server, I used the Mock Service Worker (MSW) library. The handlers for GET, POST, and PUT requests were defined to interact with the local storage. This setup allowed the application to fetch, add, and update document data as if it were interacting with a real server.
 
-### Making a Progressive Web App
+### Data Persistence
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Local storage was used to persist the document order across page reloads. The data is initially loaded from local storage if available, otherwise from the static JSON file. Any changes made to the document order are saved to local storage and synced with the mock server every 5 seconds, provided there are changes.
 
-### Advanced Configuration
+### Debugging and Error Handling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Throughout the development process, extensive use of console logging was employed to debug issues with data fetching and saving. Error handling was added to network requests to ensure robustness in case of failures.
 
-### Deployment
+## Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project showcases the use of modern React features like hooks, context, and external libraries like `react-dnd` and `msw` to create a fully functional document management application. The thought process behind the implementation focused on modularity, maintainability, and user experience, ensuring that the application is both robust and easy to use.
