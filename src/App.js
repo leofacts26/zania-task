@@ -75,7 +75,7 @@ function App() {
           ))}
         </div>
         {selectedImage && <Overlay image={selectedImage} onClose={onHandleCloseOverlay} />}
-        {/* {isSaving && <div className="spinner"></div>} */}
+        {isSaving && <div className="spinner"></div>}
         {lastSaved && <h3 className="saved">Last saved: {Math.floor((new Date() - lastSaved) / 1000)} seconds ago</h3>}
       </div>
     </DndProvider>
